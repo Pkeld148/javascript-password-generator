@@ -14,6 +14,13 @@ const lowerCase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","
 const upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 const numbers = [0,1,2,3,4,5,6,7,8,9];
 const specialCharacters = ["!","#","$","%","&","(",")","*","+","-",".","/",":",";","<","?","@","[","]","^","_","`","{","|","}","~","]"];
+var finalPassword = [];
+
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
 
 
 function generatePassword(){
@@ -23,28 +30,24 @@ function generatePassword(){
 
     if (characterLength < 8 || characterLength > 16) {
       return "Please choose password length between 8 and 16 digits! \nPress the button to try again!";
-    
     }
 
   confirmLowerCase = confirm("Would you like to have lowercase letters as part of your password?");
-  console.log(confirmLowerCase);
 
   confirmUpperCase = confirm("Would you like to have UPPERCASE letters as part of your password?");
-  console.log(confirmUpperCase);
 
   confirmNumbers = confirm("Would you like to have numbers as part of your password?");
-  console.log(confirmNumbers);
 
   confirmSpecialCharacters = confirm("Would you like to have special characters as part of your password? \nExamples: !'*+,-./:;<=>?@^_`{|}~");
-  console.log(confirmSpecialCharacters);
 
 
-  // ALL THE LOGIC GOES HERE DUMB ASS
+ for (i = 0 ; i < characterLength ; i++) {
+   var rand = getRandomInt(lowerCase.length);
+  finalPassword.push(lowerCase[rand])
+ }
 
 
-
-
-  return "temporary password";
+  return finalPassword.join('');
 }
 
 // Add event listener to generate button
