@@ -18,6 +18,27 @@ const specialCharacters = ["!","#","$","%","&","(",")","*","+","-",".","/",":","
 
 function generatePassword(){
 
+  characterLength = prompt("How many characters long would you like your password to be? \nMinimum: 8 Digits \nMaximum: 16 Digits");
+  console.log(characterLength);
+
+    if (characterLength < 8 || characterLength > 16) {
+      return "Please choose password length between 8 and 16 digits! \nPress the button to try again!";
+    
+    }
+
+  confirmLowerCase = confirm("Would you like to have lowercase letters as part of your password?");
+  console.log(confirmLowerCase);
+
+  confirmUpperCase = confirm("Would you like to have UPPERCASE letters as part of your password?");
+  console.log(confirmUpperCase);
+
+  confirmNumbers = confirm("Would you like to have numbers as part of your password?");
+  console.log(confirmNumbers);
+
+  confirmSpecialCharacters = confirm("Would you like to have special characters as part of your password? \nExamples: !'*+,-./:;<=>?@^_`{|}~");
+  console.log(confirmSpecialCharacters);
+
+
   // ALL THE LOGIC GOES HERE DUMB ASS
 
 
