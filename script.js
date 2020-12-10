@@ -26,6 +26,7 @@ function generatePassword(){
   var allChosenCharacters = [];
   var finalPassword = [];
 
+
   characterLength = prompt("How many characters long would you like your password to be? \nMinimum: 8 Digits \nMaximum: 128 Digits");
   console.log(characterLength);
 
@@ -54,13 +55,34 @@ function generatePassword(){
    allChosenCharacters = allChosenCharacters.concat(specialCharacters);
   }
 
+  if (confirmLowerCase === false && confirmUpperCase === false && confirmNumbers === false && confirmSpecialCharacters === false) {
+    return "Please be sure to choose at least one option! \nPress the button to try again!";
+  }
+
   console.log(allChosenCharacters);
  
 
+
+// Final Password generation
  for (i = 0 ; i < characterLength ; i++) {
    var rand = getRandomInt(allChosenCharacters.length);
   finalPassword.push(allChosenCharacters[rand])
  }
+
+
+
+// Validating the confirmed character types are included.
+
+// if (confirmLowerCase) {
+
+//   for (i = 0 ; i < lowerCase.length ; i++) {
+// var checkIndex = finalPassword.indexOf(lowerCase[i]);
+//  if (checkIndex === -1) {
+
+//  }
+
+// }
+// }
 
 
   return finalPassword.join('');
