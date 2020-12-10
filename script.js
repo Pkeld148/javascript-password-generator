@@ -9,7 +9,7 @@ function writePassword() {
   passwordText.value = password;
 }
 
-// Function to shuffle an array (used in this program to randomize the final password)
+// Function to randomize the contents of an array using a Fisher-Yates shuffle.
 function shuffle(array) {
   var m = array.length,
     t,
@@ -129,6 +129,10 @@ function generatePassword() {
     return "Please choose password length between 8 and 128 digits! \nPress the button to try again!";
   }
 
+  // When one of the character types is chosen, a random character from that set is 'forced' into the final password at that moment.
+  // This is to ensure that the final password is guaranteed to have at least one iteration of a chosen character type.
+  // variable 'validatorCounter' is used to keep track of how many are 'forced' like this to ensure proper final password length.
+
   confirmLowerCase = confirm(
     "Would you like to have lowercase letters as part of your password?"
   );
@@ -169,6 +173,7 @@ function generatePassword() {
     validatorCounter++;
   }
 
+  // Conditional if user fails to choose any of the options.
   if (
     confirmLowerCase === false &&
     confirmUpperCase === false &&
@@ -183,6 +188,9 @@ function generatePassword() {
     var rand = getRandomInt(allChosenCharacters.length);
     finalPassword.push(allChosenCharacters[rand]);
   }
+
+  // The final password is not yet truly random at this point because the first 1-4 digits were 'forced' from their appropriate character types.
+  // Using the 'shuffle' function below regains true randomness for the password.
   shuffle(finalPassword);
   return finalPassword.join("");
 }
