@@ -9,22 +9,17 @@ function writePassword() {
   passwordText.value = password;
 }
 
-// Function to shuffle an array
+// Function to shuffle an array (used in this program to randomize the final password)
 function shuffle(array) {
-  var m = array.length, t, i;
-
-  // While there remain elements to shuffle…
+  var m = array.length,
+    t,
+    i;
   while (m) {
-
-    // Pick a remaining element…
     i = Math.floor(Math.random() * m--);
-
-    // And swap it with the current element.
     t = array[m];
     array[m] = array[i];
     array[i] = t;
   }
-
   return array;
 }
 
@@ -128,7 +123,6 @@ function generatePassword() {
   characterLength = prompt(
     "How many characters long would you like your password to be? \nMinimum: 8 Digits \nMaximum: 128 Digits"
   );
-  console.log(characterLength);
 
   if (characterLength > 7 && characterLength < 129) {
   } else {
@@ -141,8 +135,8 @@ function generatePassword() {
   if (confirmLowerCase) {
     allChosenCharacters = allChosenCharacters.concat(lowerCase);
     var rand = getRandomInt(lowerCase.length);
-      finalPassword.push(lowerCase[rand]);
-      validatorCounter++;
+    finalPassword.push(lowerCase[rand]);
+    validatorCounter++;
   }
 
   confirmUpperCase = confirm(
@@ -151,8 +145,8 @@ function generatePassword() {
   if (confirmUpperCase) {
     allChosenCharacters = allChosenCharacters.concat(upperCase);
     var rand = getRandomInt(upperCase.length);
-      finalPassword.push(upperCase[rand]);
-      validatorCounter++;
+    finalPassword.push(upperCase[rand]);
+    validatorCounter++;
   }
 
   confirmNumbers = confirm(
@@ -161,8 +155,8 @@ function generatePassword() {
   if (confirmNumbers) {
     allChosenCharacters = allChosenCharacters.concat(numbers);
     var rand = getRandomInt(numbers.length);
-      finalPassword.push(numbers[rand]);
-      validatorCounter++;
+    finalPassword.push(numbers[rand]);
+    validatorCounter++;
   }
 
   confirmSpecialCharacters = confirm(
@@ -171,8 +165,8 @@ function generatePassword() {
   if (confirmSpecialCharacters) {
     allChosenCharacters = allChosenCharacters.concat(specialCharacters);
     var rand = getRandomInt(specialCharacters.length);
-      finalPassword.push(specialCharacters[rand]);
-      validatorCounter++;
+    finalPassword.push(specialCharacters[rand]);
+    validatorCounter++;
   }
 
   if (
@@ -183,22 +177,14 @@ function generatePassword() {
   ) {
     return "Please be sure to choose at least one option! \nPress the button to try again!";
   }
-  console.log(allChosenCharacters);
-  console.log(finalPassword);
 
-  shuffle(allChosenCharacters);
-  console.log(allChosenCharacters);
-
-    // Final Password generation
-    for (i = 0 + validatorCounter; i < characterLength; i++) {
-      var rand = getRandomInt(allChosenCharacters.length);
-      finalPassword.push(allChosenCharacters[rand]);
-    }
-
-    console.log(finalPassword);
-
-  return finalPassword.join('');
-
+  // Final Password generation
+  for (i = 0 + validatorCounter; i < characterLength; i++) {
+    var rand = getRandomInt(allChosenCharacters.length);
+    finalPassword.push(allChosenCharacters[rand]);
+  }
+  shuffle(finalPassword);
+  return finalPassword.join("");
 }
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
