@@ -9,6 +9,30 @@ function writePassword() {
   passwordText.value = password;
 }
 
+// Function to shuffle an array
+function shuffle(array) {
+  var m = array.length, t, i;
+
+  // While there remain elements to shuffle…
+  while (m) {
+
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * m--);
+
+    // And swap it with the current element.
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+
+  return array;
+}
+
+// Function to create random integer
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
 var lowerCase = [
   "a",
   "b",
@@ -96,13 +120,10 @@ var specialCharacters = [
   "]",
 ];
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
-}
-
 function generatePassword() {
   var allChosenCharacters = [];
   var finalPassword = [];
+  var validatorCounter = 0;
 
   characterLength = prompt(
     "How many characters long would you like your password to be? \nMinimum: 8 Digits \nMaximum: 128 Digits"
@@ -119,6 +140,9 @@ function generatePassword() {
   );
   if (confirmLowerCase) {
     allChosenCharacters = allChosenCharacters.concat(lowerCase);
+    var rand = getRandomInt(lowerCase.length);
+      finalPassword.push(lowerCase[rand]);
+      validatorCounter++;
   }
 
   confirmUpperCase = confirm(
@@ -126,6 +150,9 @@ function generatePassword() {
   );
   if (confirmUpperCase) {
     allChosenCharacters = allChosenCharacters.concat(upperCase);
+    var rand = getRandomInt(upperCase.length);
+      finalPassword.push(upperCase[rand]);
+      validatorCounter++;
   }
 
   confirmNumbers = confirm(
@@ -133,6 +160,9 @@ function generatePassword() {
   );
   if (confirmNumbers) {
     allChosenCharacters = allChosenCharacters.concat(numbers);
+    var rand = getRandomInt(numbers.length);
+      finalPassword.push(numbers[rand]);
+      validatorCounter++;
   }
 
   confirmSpecialCharacters = confirm(
@@ -140,6 +170,9 @@ function generatePassword() {
   );
   if (confirmSpecialCharacters) {
     allChosenCharacters = allChosenCharacters.concat(specialCharacters);
+    var rand = getRandomInt(specialCharacters.length);
+      finalPassword.push(specialCharacters[rand]);
+      validatorCounter++;
   }
 
   if (
@@ -150,58 +183,22 @@ function generatePassword() {
   ) {
     return "Please be sure to choose at least one option! \nPress the button to try again!";
   }
+  console.log(allChosenCharacters);
+  console.log(finalPassword);
 
+  shuffle(allChosenCharacters);
   console.log(allChosenCharacters);
 
-  for (i = 0; i < 100; i++) {
     // Final Password generation
-    for (i = 0; i < characterLength; i++) {
+    for (i = 0 + validatorCounter; i < characterLength; i++) {
       var rand = getRandomInt(allChosenCharacters.length);
       finalPassword.push(allChosenCharacters[rand]);
     }
 
-    // Validating the confirmed character types are included.
+    console.log(finalPassword);
 
-    if (confirmLowerCase) {
-      for (i = 0; i < lowerCase.length; i++) {
-        var checkIndex = finalPassword.indexOf(lowerCase[i]);
-        console.log(finalPassword);
-        console.log(checkIndex);
-        if (checkIndex < 0) {
-          continue;
-        } else {
-          break;
-        }
-      }
-    }
-    if (confirmUpperCase) {
-      for (i = 0; i < upperCase.length; i++) {
-        var checkIndex = finalPassword.indexOf(upperCase[i]);
-        if (checkIndex < 0) {
-          // Generate password again
-        }
-      }
-    }
-    if (confirmNumbers) {
-      for (i = 0; i < numbers.length; i++) {
-        var checkIndex = finalPassword.indexOf(numbers[i]);
-        if (checkIndex < 0) {
-          // Generate password again
-        }
-      }
-    }
-    if (confirmSpecialCharacters) {
-      for (i = 0; i < specialCharacters.length; i++) {
-        var checkIndex = finalPassword.indexOf(specialCharacters[i]);
-        if (checkIndex < 0) {
-          // Generate password again
-        }
-      }
-    } else {
-      return finalPassword.join("");
-    }
-  }
+  return finalPassword.join('');
+
 }
-
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
